@@ -16,29 +16,31 @@ function App() {
 		<Router>
 			<div className="App">
 				<Header />
-				<Switch>
-					<Route path="/marketplace/:itemId">
-						<Item />
-					</Route>
-					<Route path="/marketplace">
-						<ItemsList />
-					</Route>
-					<Route path="/cart">
-						<Cart />
-					</Route>
-					<Route path="/profile">
-						<Profile />
-					</Route>
-					<Route path="/signup">
-						<Signup />
-					</Route>
-					<Route path="/signin">
-						<Signin />
-					</Route>
-					<Route path="/">
-						<Home />
-					</Route>
-				</Switch>
+				<main>
+					<Switch>
+						<Route path="/marketplace/:itemId">
+							<Item />
+						</Route>
+						<Route path="/marketplace">
+							<ItemsList />
+						</Route>
+						<Route path="/cart">
+							<Cart />
+						</Route>
+						<Route path="/profile">
+							<Profile />
+						</Route>
+						<Route path="/signup">
+							<Signup />
+						</Route>
+						<Route path="/signin">
+							<Signin />
+						</Route>
+						<Route path="/">
+							<Home />
+						</Route>
+					</Switch>
+				</main>
 				<Footer />
 			</div>
 		</Router>
