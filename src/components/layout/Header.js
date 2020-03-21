@@ -10,7 +10,7 @@ import {
 	NavLink,
 	Button
 } from 'reactstrap';
-import Logo from '../images/logo1.png';
+import Logo from '../images/logo.png';
 
 const Header = props => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +20,9 @@ const Header = props => {
 	return (
 		<div className="Header">
 			<header>
-				<Navbar style={{ padding: '0 15%' }} color="info" light expand="md">
+				<Navbar style={{ padding: '5px 15%' }} color="info" light expand="md">
 					<NavbarBrand tag={Link} to="/">
-						<img height="" src={Logo} alt="" />
+						<img height="" src={Logo} alt="Logo" />
 					</NavbarBrand>
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={isOpen} navbar>

@@ -1,0 +1,9 @@
+.featured {
+	width: 100%;
+	text-align: center;
+}
+.featured img {
+	width: 100%;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+	margin-bottom: 20px;
+}

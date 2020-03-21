@@ -16,7 +16,7 @@ function App() {
 		<Router>
 			<div className="App">
 				<Header />
-				<main>
+				<main className="container">
 					<Switch>
 						<Route path="/marketplace/:itemId">
 							<Item />
