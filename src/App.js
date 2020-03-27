@@ -10,40 +10,43 @@ import Item from './components/items/Item';
 import Profile from './components/profile/Profile';
 import Cart from './components/cart/Cart';
 import './App.css';
+import UserProvider from './context/UserProvider';
 
 function App() {
 	return (
-		<Router>
-			<div className="App">
-				<Header />
-				<main className="container">
-					<Switch>
-						<Route path="/marketplace/:itemId">
-							<Item />
-						</Route>
-						<Route path="/marketplace">
-							<ItemsList />
-						</Route>
-						<Route path="/cart">
-							<Cart />
-						</Route>
-						<Route path="/profile">
-							<Profile />
-						</Route>
-						<Route path="/signup">
-							<Signup />
-						</Route>
-						<Route path="/signin">
-							<Signin />
-						</Route>
-						<Route path="/">
-							<Home />
-						</Route>
-					</Switch>
-				</main>
-				<Footer />
-			</div>
-		</Router>
+		<UserProvider>
+			<Router>
+				<div className="App">
+					<Header />
+					<main className="container">
+						<Switch>
+							<Route path="/marketplace/:itemId">
+								<Item />
+							</Route>
+							<Route path="/marketplace">
+								<ItemsList />
+							</Route>
+							<Route path="/cart">
+								<Cart />
+							</Route>
+							<Route path="/profile">
+								<Profile />
+							</Route>
+							<Route path="/signup">
+								<Signup />
+							</Route>
+							<Route path="/signin">
+								<Signin />
+							</Route>
+							<Route path="/">
+								<Home />
+							</Route>
+						</Switch>
+					</main>
+					<Footer />
+				</div>
+			</Router>
+		</UserProvider>
 	);
 }
 
