@@ -43,7 +43,7 @@ const Signup = props => {
 				})
 				.then(docRef => {
 					console.log(docRef);
-					history.push('/signin');
+					history.push('/marketplace');
 				})
 				.catch(err => {
 					console.log(err);
