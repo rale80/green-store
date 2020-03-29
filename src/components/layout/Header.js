@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
 	Collapse,
@@ -11,9 +11,12 @@ import {
 	Button
 } from 'reactstrap';
 import Logo from '../images/logo.png';
+import { UserContext } from '../../context/UserContext';
 
 const Header = props => {
 	const [isOpen, setIsOpen] = useState(false);
+	const userCtx = useContext(UserContext);
+	const { user, logout } = userCtx;
 
 	const toggle = () => setIsOpen(!isOpen);
 
@@ -27,36 +30,43 @@ const Header = props => {
 					<NavbarToggler onClick={toggle} />
 					<Collapse isOpen={isOpen} navbar>
 						<Nav className="ml-auto" navbar>
-							<NavItem>
-								<NavLink tag={Link} to="/profile">
-									Profile
-								</NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink tag={Link} to="/marketplace">
-									Marketplace
-								</NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink tag={Link} to="/cart">
-									Cart
-								</NavLink>
-							</NavItem>
-							<NavItem>
-								<Button color="link" className="nav-link">
-									SignOut
-								</Button>
-							</NavItem>
-							<NavItem>
-								<NavLink tag={Link} to="/signup">
-									SignUp
-								</NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink tag={Link} to="/signin">
-									SignIn
-								</NavLink>
-							</NavItem>
+							{user ? (
+								<>
+									<NavItem>
+										<NavLink tag={Link} to="/profile">
+											Profile
+										</NavLink>
+									</NavItem>
+									<NavItem>
+										<NavLink tag={Link} to="/marketplace">
+											Marketplace
+										</NavLink>
+									</NavItem>
+									<NavItem>
+										<NavLink tag={Link} to="/cart">
+											Cart
+										</NavLink>
+									</NavItem>
+									<NavItem>
+										<Button color="link" className="nav-link" onClick={logout}>
+											SignOut
+										</Button>
+									</NavItem>
+								</>
+							) : (
+								<>
+									<NavItem>
+										<NavLink tag={Link} to="/signup">
+											SignUp
+										</NavLink>
+									</NavItem>
+									<NavItem>
+										<NavLink tag={Link} to="/signin">
+											SignIn
+										</NavLink>
+									</NavItem>
+								</>
+							)}
 						</Nav>
 					</Collapse>
 				</Navbar>

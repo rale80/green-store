@@ -26,7 +26,6 @@ const Signin = props => {
 		auth
 			.signInWithEmailAndPassword(email, password)
 			.then(docRef => {
-				console.log(docRef);
 				history.push('/marketplace');
 			})
 			.catch(err => {

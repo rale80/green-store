@@ -32,6 +32,7 @@ const Signup = props => {
 		const { errors, isValid } = validate(values);
 
 		setErrors(errors);
+
 		if (isValid) {
 			auth
 				.createUserWithEmailAndPassword(email, password)
@@ -42,7 +43,6 @@ const Signup = props => {
 						.set({ name, address, phone, email });
 				})
 				.then(docRef => {
-					console.log(docRef);
 					history.push('/marketplace');
 				})
 				.catch(err => {
