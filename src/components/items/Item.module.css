@@ -1,0 +1,48 @@
+.Item {
+	width: 32.2%;
+	margin: 10px 5px;
+	padding: 8px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+.imgWrapper {
+	overflow: hidden;
+}
+.Item img {
+	border: 1px solid rgb(9, 82, 15);
+	transition: transform 0.2s;
+}
+.Item img:hover {
+	transform: scale(1.1);
+}
+.Item span {
+	display: block;
+	margin-bottom: 8px;
+}
+.Item input {
+	width: 70%;
+	padding-left: 5px;
+}
+.Item button {
+	width: 30%;
+}
+.Item button svg {
+	margin-bottom: 3px;
+}
+
+@media (max-width: 991px) {
+	.Item {
+		width: 31.5%;
+	}
+	.Item input,
+	.Item button {
+		display: block;
+		width: 100%;
+		margin: 5px 0;
+	}
+}
+
+@media (max-width: 767px) {
+	.Item {
+		width: 100%;
+	}
+}

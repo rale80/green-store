@@ -56,7 +56,7 @@ function App() {
 			<Router>
 				<div className="App">
 					<Header />
-					<main className="container">
+					<main className="container-md">
 						<Switch>
 							<Route exact path="/">
 								<Home />
