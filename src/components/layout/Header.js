@@ -10,7 +10,7 @@ import {
 	NavLink,
 	Button
 } from 'reactstrap';
-import Logo from '../images/logo.png';
+import Logo from '../../images/logo.png';
 import { UserContext } from '../../context/UserContext';
 
 const Header = props => {

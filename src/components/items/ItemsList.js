@@ -21,6 +21,7 @@ const ItemsList = props => {
 	return (
 		<div className="ItemsList">
 			{loading && <div>Loading...</div>}
+			<h1>Marketplace</h1>
 			<div className="row justify-content-around">
 				{itemsList.map(item => {
 					return <Item key={item.id} item={item.data()} />;

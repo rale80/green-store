@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/layout/Home';
@@ -16,6 +11,7 @@ import Profile from './components/profile/Profile';
 import Cart from './components/cart/Cart';
 import { UserProvider } from './context/UserContext';
 import PrivateRoute from './components/auth/PrivateRoute';
+import AuthRoute from './components/auth/AuthRoute';
 import { auth } from './firebase/firebase';
 import './App.css';
 
@@ -61,6 +57,12 @@ function App() {
 							<Route exact path="/">
 								<Home />
 							</Route>
+							<AuthRoute path="/signup">
+								<Signup />
+							</AuthRoute>
+							<AuthRoute path="/signin">
+								<Signin />
+							</AuthRoute>
 							<PrivateRoute path="/marketplace/:itemId">
 								<Item />
 							</PrivateRoute>
@@ -74,18 +76,6 @@ function App() {
 								<Profile />
 							</PrivateRoute>
 						</Switch>
-						{user ? (
-							<Redirect to="/marketplace" />
-						) : (
-							<>
-								<Route path="/signup">
-									<Signup />
-								</Route>
-								<Route path="/signin">
-									<Signin />
-								</Route>
-							</>
-						)}
 					</main>
 					<Footer />
 				</div>

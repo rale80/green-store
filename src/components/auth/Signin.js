@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { MdLockOutline } from 'react-icons/md';
 import classNames from 'classnames';
@@ -14,7 +14,7 @@ const Signin = props => {
 		email: '',
 		password: ''
 	});
-	const history = useHistory();
+	// const history = useHistory();
 
 	const handleChange = e => {
 		setValues({ ...values, [e.target.name]: e.target.value });
@@ -25,9 +25,7 @@ const Signin = props => {
 
 		auth
 			.signInWithEmailAndPassword(email, password)
-			.then(docRef => {
-				history.push('/marketplace');
-			})
+			.then(docRef => {})
 			.catch(err => {
 				if (err.code === 'auth/wrong-password') {
 					setErrors({ ...errors, password: err.message });

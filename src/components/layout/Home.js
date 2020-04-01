@@ -1,5 +1,5 @@
 import React from 'react';
-import FeaturedImage from '../images/fruits.jpg';
+import FeaturedImage from '../../images/fruits.jpg';
 import styles from './Home.module.css';
 import classNames from 'classnames';
 import CtaCard from './CtaCard';

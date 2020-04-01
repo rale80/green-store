@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { MdLockOutline } from 'react-icons/md';
 import classNames from 'classnames';
@@ -21,7 +21,7 @@ const Signup = props => {
 		email: '',
 		password: ''
 	});
-	const history = useHistory();
+	// const history = useHistory();
 
 	const handleChange = e => {
 		setValues({ ...values, [e.target.name]: e.target.value });
@@ -42,9 +42,7 @@ const Signup = props => {
 						.doc(cred.user.uid)
 						.set({ name, address, phone, email });
 				})
-				.then(docRef => {
-					history.push('/marketplace');
-				})
+				.then(docRef => {})
 				.catch(err => {
 					console.log(err);
 				});

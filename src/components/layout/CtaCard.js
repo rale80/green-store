@@ -7,7 +7,7 @@ import {
 	CardTitle,
 	Button
 } from 'reactstrap';
-import Basket from '../images/basket.jpg';
+import Basket from '../../images/basket.jpg';
 import { Link } from 'react-router-dom';
 
 const CtaCard = props => {
