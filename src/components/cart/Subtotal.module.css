@@ -1,0 +1,11 @@
+.Subtotal {
+	width: 50%;
+	margin: 30px auto;
+	background: rgb(126, 218, 161);
+	padding: 20px;
+	border-radius: 10px;
+	border: 2px solid rgb(88, 153, 131);
+}
+.SubtotalValue {
+	font-weight: bold;
+}

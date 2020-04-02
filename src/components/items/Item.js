@@ -1,32 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import classNames from 'classnames';
 import { MdAddShoppingCart } from 'react-icons/md';
+import {
+	Card,
+	CardBody,
+	CardImg,
+	CardTitle,
+	CardText,
+	Button
+} from 'reactstrap';
+import { CartContext } from '../../context/CartContext';
 import styles from './Item.module.css';
 
-const Item = ({ image, name, price, type }) => {
+const Item = ({ item, itemId }) => {
 	const [quantity, setQuantity] = useState(0);
+	const [disabled, setDisabled] = useState(false);
+	const { addToCart } = useContext(CartContext);
+	const { image, name, price, type } = item;
 
-	const addToCart = () => {};
+	const handleChange = e => {
+		setQuantity(e.target.value);
+		setDisabled(false);
+	};
+	const handleClick = e => {
+		if (Number(quantity) > 0) {
+			addToCart({ itemId, name, quantity, price, type });
+			setDisabled(true);
+		}
+	};
 
 	return (
-		<div className={classNames(styles.Item, 'card')}>
+		<Card className={classNames(styles.Item, disabled ? styles.Ordered : '')}>
 			<div className={styles.imgWrapper}>
-				<img className="card-img-top" src={`/img/${type}/${image}`} alt="" />
-			</div>
-			<div className="card-body">
-				<h4>{name}</h4>
-				<span>Price: {price}$</span>
-				<input
-					type="number"
-					value={quantity}
-					onChange={e => setQuantity(e.target.value)}
-					placeholder="kg"
+				<CardImg
+					top
+					width="100%"
+					src={`/img/${type}/${image}`}
+					alt="Item image"
 				/>
-				<button onClick={addToCart}>
-					<MdAddShoppingCart /> ADD
-				</button>
 			</div>
-		</div>
+			<CardBody>
+				<CardTitle style={{ fontSize: '26px', fontWeight: 'bold' }}>
+					{name}
+				</CardTitle>
+				<CardText>
+					<span>Price: {price}$</span>
+					<input
+						type="number"
+						value={quantity}
+						onChange={handleChange}
+						placeholder="kg"
+					/>
+					<Button disabled={disabled} onClick={handleClick}>
+						<MdAddShoppingCart /> ADD
+					</Button>
+				</CardText>
+			</CardBody>
+		</Card>
 	);
 };
 

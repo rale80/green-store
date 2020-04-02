@@ -8,6 +8,7 @@ const ItemsList = props => {
 
 	useEffect(() => {
 		setLoading(true);
+
 		firestore
 			.collection('items')
 			.get()
@@ -22,9 +23,10 @@ const ItemsList = props => {
 		<div className="ItemsList">
 			{loading && <div>Loading...</div>}
 			<h1>Marketplace</h1>
+			<h5 className="leading">When you done, go to cart to finish order</h5>
 			<div className="row justify-content-around">
 				{itemsList.map(item => {
-					return <Item key={item.id} item={item.data()} />;
+					return <Item key={item.id} itemId={item.id} item={item.data()} />;
 				})}
 			</div>
 		</div>

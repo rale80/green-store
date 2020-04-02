@@ -14,7 +14,6 @@ const Signin = props => {
 		email: '',
 		password: ''
 	});
-	// const history = useHistory();
 
 	const handleChange = e => {
 		setValues({ ...values, [e.target.name]: e.target.value });

@@ -10,6 +10,7 @@ import Item from './components/items/Item';
 import Profile from './components/profile/Profile';
 import Cart from './components/cart/Cart';
 import { UserProvider } from './context/UserContext';
+import { CartProvider } from './context/CartContext';
 import PrivateRoute from './components/auth/PrivateRoute';
 import AuthRoute from './components/auth/AuthRoute';
 import { auth } from './firebase/firebase';
@@ -18,6 +19,9 @@ import './App.css';
 function App() {
 	const [user, setUser] = useState(
 		JSON.parse(localStorage.getItem('user')) || null
+	);
+	const [cart, setCart] = useState(
+		JSON.parse(localStorage.getItem('cart')) || []
 	);
 
 	useEffect(() => {
@@ -32,6 +36,10 @@ function App() {
 		});
 	}, [user]);
 
+	useEffect(() => {
+		localStorage.setItem('cart', JSON.stringify(cart));
+	}, [cart]);
+
 	const logoutUser = () => {
 		auth
 			.signOut()
@@ -42,44 +50,63 @@ function App() {
 		localStorage.removeItem('user');
 	};
 
+	const addItemToCart = cartItem => {
+		setCart([...cart, cartItem]);
+	};
+
+	const removeFromCart = id => {
+		let newCart = [...cart];
+		let foundIndex = newCart.findIndex(cartItem => cartItem.itemId === id);
+		newCart.splice(foundIndex, 1);
+		setCart(newCart);
+	};
+
 	const userState = {
 		user,
 		logout: logoutUser
 	};
 
+	const cartState = {
+		cart,
+		addToCart: addItemToCart,
+		removeFromCart: removeFromCart
+	};
+
 	return (
 		<UserProvider value={userState}>
-			<Router>
-				<div className="App">
-					<Header />
-					<main className="container-md">
-						<Switch>
-							<Route exact path="/">
-								<Home />
-							</Route>
-							<AuthRoute path="/signup">
-								<Signup />
-							</AuthRoute>
-							<AuthRoute path="/signin">
-								<Signin />
-							</AuthRoute>
-							<PrivateRoute path="/marketplace/:itemId">
-								<Item />
-							</PrivateRoute>
-							<PrivateRoute path="/marketplace">
-								<ItemsList />
-							</PrivateRoute>
-							<PrivateRoute path="/cart">
-								<Cart />
-							</PrivateRoute>
-							<PrivateRoute path="/profile">
-								<Profile />
-							</PrivateRoute>
-						</Switch>
-					</main>
-					<Footer />
-				</div>
-			</Router>
+			<CartProvider value={cartState}>
+				<Router>
+					<div className="App">
+						<Header />
+						<main className="container-md">
+							<Switch>
+								<Route exact path="/">
+									<Home />
+								</Route>
+								<AuthRoute path="/signup">
+									<Signup />
+								</AuthRoute>
+								<AuthRoute path="/signin">
+									<Signin />
+								</AuthRoute>
+								<PrivateRoute path="/marketplace/:itemId">
+									<Item />
+								</PrivateRoute>
+								<PrivateRoute path="/marketplace">
+									<ItemsList />
+								</PrivateRoute>
+								<PrivateRoute path="/cart">
+									<Cart />
+								</PrivateRoute>
+								<PrivateRoute path="/profile">
+									<Profile />
+								</PrivateRoute>
+							</Switch>
+						</main>
+						<Footer />
+					</div>
+				</Router>
+			</CartProvider>
 		</UserProvider>
 	);
 }

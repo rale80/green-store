@@ -19,14 +19,19 @@
 	margin-bottom: 8px;
 }
 .Item input {
-	width: 70%;
-	padding-left: 5px;
+	width: 58%;
+	padding: 3px 8px 5px;
 }
 .Item button {
-	width: 30%;
+	width: 40%;
+	margin-left: 5px;
 }
 .Item button svg {
 	margin-bottom: 3px;
+}
+
+.Ordered {
+	background: rgb(173, 243, 107);
 }
 
 @media (max-width: 991px) {
