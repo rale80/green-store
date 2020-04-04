@@ -11,14 +11,14 @@ const CartItem = ({ cartItemData }) => {
 		<div
 			className={classNames(
 				styles.CartItem,
-				'd-flex flex-wrap justify-content-between mb-3'
+				'd-flex justify-content-between mb-3'
 			)}>
 			<img
 				src={`/img/${type}/${name.toLowerCase()}_thumb.jpg`}
 				alt="Cart Item Thumb"
 			/>
 			<div className="">
-				<h3>{name}</h3>
+				<h4>{name}</h4>
 				<p>
 					{quantity} x {price} $
 				</p>

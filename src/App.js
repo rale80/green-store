@@ -61,6 +61,10 @@ function App() {
 		setCart(newCart);
 	};
 
+	const clearCart = () => {
+		setCart([]);
+	};
+
 	const userState = {
 		user,
 		logout: logoutUser
@@ -69,7 +73,8 @@ function App() {
 	const cartState = {
 		cart,
 		addToCart: addItemToCart,
-		removeFromCart: removeFromCart
+		removeFromCart: removeFromCart,
+		clearCart: clearCart
 	};
 
 	return (

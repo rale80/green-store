@@ -10,7 +10,7 @@
 	.CartItem {
 		width: 100%;
 	}
-	h2 {
-		font-size: 20px;
+	.CartItem h4 {
+		font-size: 16px;
 	}
 }

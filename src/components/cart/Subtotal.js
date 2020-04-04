@@ -3,7 +3,7 @@ import { Media, Button } from 'reactstrap';
 import styles from './Subtotal.module.css';
 import calcTotal from '../../utils/calcTotal';
 
-const Subtotal = ({ cart }) => {
+const Subtotal = ({ cart, showCheckout }) => {
 	return (
 		<Media className={styles.Subtotal}>
 			<Media body>
@@ -11,7 +11,7 @@ const Subtotal = ({ cart }) => {
 				<em className={styles.SubtotalValue}>{calcTotal(cart)} $</em>
 			</Media>
 			<Media right>
-				<Button>Checkout</Button>
+				<Button onClick={() => showCheckout()}>Checkout</Button>
 			</Media>
 		</Media>
 	);
