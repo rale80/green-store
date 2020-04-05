@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { UserContext } from '../../context/UserContext';
 import { CartContext } from '../../context/CartContext';
 import { firestore } from '../../firebase/firebase';
 import calcTotal from '../../utils/calcTotal';
 
-const Checkout = props => {
+const Checkout = (props) => {
 	const [userData, setUserData] = useState({});
 	const { user } = useContext(UserContext);
 	const { cart, clearCart } = useContext(CartContext);
@@ -17,14 +18,14 @@ const Checkout = props => {
 			.add({
 				userId: user.uid,
 				total: calcTotal(cart),
-				cart: cart
+				cart: cart,
 			})
-			.then(function(docRef) {
+			.then(function (docRef) {
 				clearCart();
 				toggle();
 				finishOrder();
 			})
-			.catch(err => console.error('Error adding document: ', err));
+			.catch((err) => console.error('Error adding document: ', err));
 	};
 
 	useEffect(() => {
@@ -32,10 +33,10 @@ const Checkout = props => {
 			.collection('users')
 			.doc(user.uid)
 			.get()
-			.then(user => {
+			.then((user) => {
 				setUserData(user.data());
 			})
-			.catch(err => console.log(err));
+			.catch((err) => console.log(err));
 	}, [user.uid]);
 
 	return (
@@ -72,6 +73,12 @@ const Checkout = props => {
 			</Modal>
 		</div>
 	);
+};
+
+Checkout.propTypes = {
+	modal: PropTypes.bool.isRequired,
+	toggle: PropTypes.func.isRequired,
+	finishOrder: PropTypes.func.isRequired,
 };
 
 export default Checkout;

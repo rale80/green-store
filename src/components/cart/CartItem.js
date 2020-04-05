@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CartContext } from '../../context/CartContext';
 import styles from './CartItem.module.css';
@@ -30,6 +31,10 @@ const CartItem = ({ cartItemData }) => {
 			</button>
 		</div>
 	);
+};
+
+CartItem.propTypes = {
+	cartItemData: PropTypes.object.isRequired,
 };
 
 export default CartItem;

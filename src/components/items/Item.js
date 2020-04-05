@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { MdAddShoppingCart } from 'react-icons/md';
 import {
@@ -7,7 +8,7 @@ import {
 	CardImg,
 	CardTitle,
 	CardText,
-	Button
+	Button,
 } from 'reactstrap';
 import { CartContext } from '../../context/CartContext';
 import styles from './Item.module.css';
@@ -15,17 +16,21 @@ import styles from './Item.module.css';
 const Item = ({ item, itemId }) => {
 	const [quantity, setQuantity] = useState(0);
 	const [disabled, setDisabled] = useState(false);
+	const [invalid, setInvalid] = useState(false);
 	const { addToCart } = useContext(CartContext);
 	const { image, name, price, type } = item;
 
-	const handleChange = e => {
+	const handleChange = (e) => {
 		setQuantity(e.target.value);
 		setDisabled(false);
 	};
-	const handleClick = e => {
-		if (Number(quantity) > 0) {
-			addToCart({ itemId, name, quantity, price, type });
+	const handleClick = (e) => {
+		if (!Number.isNaN(parseFloat(quantity)) && Number(quantity) > 0) {
+			addToCart({ itemId, name, quantity: parseFloat(quantity), price, type });
 			setDisabled(true);
+			setInvalid(false);
+		} else {
+			setInvalid(true);
 		}
 	};
 
@@ -50,6 +55,7 @@ const Item = ({ item, itemId }) => {
 						value={quantity}
 						onChange={handleChange}
 						placeholder="kg"
+						className={invalid ? styles.invalid : ''}
 					/>
 					<Button disabled={disabled} onClick={handleClick}>
 						<MdAddShoppingCart /> ADD
@@ -58,6 +64,11 @@ const Item = ({ item, itemId }) => {
 			</CardBody>
 		</Card>
 	);
+};
+
+Item.propTypes = {
+	item: PropTypes.object.isRequired,
+	itemId: PropTypes.string.isRequired,
 };
 
 export default Item;

@@ -34,6 +34,10 @@
 	background: rgb(173, 243, 107);
 }
 
+.invalid {
+	border: 1px solid #f00;
+}
+
 @media (max-width: 991px) {
 	.Item {
 		width: 31.5%;
