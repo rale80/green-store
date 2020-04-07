@@ -5,27 +5,27 @@ import { MdLockOutline } from 'react-icons/md';
 import classNames from 'classnames';
 import { auth } from '../../firebase/firebase';
 
-const Signin = props => {
+const Signin = (props) => {
 	const [values, setValues] = useState({
 		email: '',
-		password: ''
+		password: '',
 	});
 	const [errors, setErrors] = useState({
 		email: '',
-		password: ''
+		password: '',
 	});
 
-	const handleChange = e => {
+	const handleChange = (e) => {
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 
-	const submitFormSignin = e => {
+	const submitFormSignin = (e) => {
 		e.preventDefault();
 
 		auth
 			.signInWithEmailAndPassword(email, password)
-			.then(docRef => {})
-			.catch(err => {
+			.then((docRef) => {})
+			.catch((err) => {
 				if (err.code === 'auth/wrong-password') {
 					setErrors({ ...errors, password: err.message });
 				}
@@ -51,7 +51,7 @@ const Signin = props => {
 								value={email}
 								onChange={handleChange}
 								className={classNames('py-4', {
-									'is-invalid': errors.email
+									'is-invalid': errors.email,
 								})}
 								placeholder="Email"
 								required
@@ -67,7 +67,7 @@ const Signin = props => {
 								value={password}
 								onChange={handleChange}
 								className={classNames('py-4', {
-									'is-invalid': errors.password
+									'is-invalid': errors.password,
 								})}
 								placeholder="Password"
 								required

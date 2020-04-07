@@ -6,27 +6,27 @@ import classNames from 'classnames';
 import { auth, firestore } from '../../firebase/firebase';
 import validate from '../../validate/validateSignup';
 
-const Signup = props => {
+const Signup = (props) => {
 	const [values, setValues] = useState({
 		name: '',
 		address: '',
 		phone: '',
 		email: '',
-		password: ''
+		password: '',
 	});
 	const [errors, setErrors] = useState({
 		name: '',
 		address: '',
 		phone: '',
 		email: '',
-		password: ''
+		password: '',
 	});
 
-	const handleChange = e => {
+	const handleChange = (e) => {
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 
-	const submitFormSignup = e => {
+	const submitFormSignup = (e) => {
 		e.preventDefault();
 		const { errors, isValid } = validate(values);
 
@@ -35,15 +35,17 @@ const Signup = props => {
 		if (isValid) {
 			auth
 				.createUserWithEmailAndPassword(email, password)
-				.then(cred => {
+				.then((cred) => {
 					return firestore
 						.collection('users')
 						.doc(cred.user.uid)
-						.set({ name, address, phone, email });
+						.set({ id: cred.user.uid, name, address, phone, email });
 				})
-				.then(docRef => {})
-				.catch(err => {
-					console.log(err);
+				.then((docRef) => {})
+				.catch((err) => {
+					if (err.code === 'auth/email-already-in-use') {
+						setErrors({ ...errors, email: err.message });
+					}
 				});
 		}
 	};
@@ -63,7 +65,7 @@ const Signup = props => {
 							value={name}
 							onChange={handleChange}
 							className={classNames('py-4', {
-								'is-invalid': errors.name
+								'is-invalid': errors.name,
 							})}
 							placeholder="Name"
 							required
@@ -79,7 +81,7 @@ const Signup = props => {
 							value={address}
 							onChange={handleChange}
 							className={classNames('py-4', {
-								'is-invalid': errors.address
+								'is-invalid': errors.address,
 							})}
 							placeholder="Address"
 							required
@@ -95,7 +97,7 @@ const Signup = props => {
 							value={phone}
 							onChange={handleChange}
 							className={classNames('py-4', {
-								'is-invalid': errors.phone
+								'is-invalid': errors.phone,
 							})}
 							placeholder="Phone"
 							required
@@ -111,7 +113,7 @@ const Signup = props => {
 							value={email}
 							onChange={handleChange}
 							className={classNames('py-4', {
-								'is-invalid': errors.email
+								'is-invalid': errors.email,
 							})}
 							placeholder="Email"
 							required
@@ -127,7 +129,7 @@ const Signup = props => {
 							value={password}
 							onChange={handleChange}
 							className={classNames('py-4', {
-								'is-invalid': errors.password
+								'is-invalid': errors.password,
 							})}
 							placeholder="Password"
 							required

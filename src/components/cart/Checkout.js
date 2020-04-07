@@ -16,7 +16,7 @@ const Checkout = (props) => {
 		firestore
 			.collection('orders')
 			.add({
-				userId: user.uid,
+				userId: user.id,
 				total: calcTotal(cart),
 				cart: cart,
 			})
@@ -31,13 +31,13 @@ const Checkout = (props) => {
 	useEffect(() => {
 		firestore
 			.collection('users')
-			.doc(user.uid)
+			.doc(user.id)
 			.get()
 			.then((user) => {
 				setUserData(user.data());
 			})
 			.catch((err) => console.log(err));
-	}, [user.uid]);
+	}, [user.id]);
 
 	return (
 		<div className="Checkout">

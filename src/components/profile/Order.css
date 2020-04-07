@@ -1,0 +1,14 @@
+.slide-enter {
+	transform: scaleY(0);
+}
+.slide-enter-active {
+	transform: scaleY(1);
+	transition: all 0.3s;
+}
+.slide-exit {
+	transform: scaleY(1);
+}
+.slide-exit-active {
+	transform: scaleY(0);
+	transition: all 0.3s;
+}

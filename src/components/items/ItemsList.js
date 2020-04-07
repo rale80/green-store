@@ -10,14 +10,10 @@ const ItemsList = (props) => {
 	useEffect(() => {
 		setLoading(true);
 
-		firestore
-			.collection('items')
-			.get()
-			.then((snapshot) => {
-				setLoading(false);
-				setItemsList(snapshot.docs);
-			})
-			.catch((err) => console.log(err));
+		firestore.collection('items').onSnapshot((snapshot) => {
+			setLoading(false);
+			setItemsList(snapshot.docs);
+		});
 	}, []);
 
 	return (
